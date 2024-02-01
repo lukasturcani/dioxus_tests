@@ -32,6 +32,7 @@ pub fn App(cx: Scope) -> Element {
                 .0
                 .iter()
                 .map(|child| rsx!(Child {
+                    key: "{child.value}",
                     state: child.clone(),
                     on_click: |_|  cx.spawn(edit_10_children(children.clone())),
                 }))
@@ -44,7 +45,6 @@ fn Child<'a>(cx: Scope, state: ChildState, on_click: EventHandler<'a>) -> Elemen
     log::info!("rendering child");
     cx.render(rsx! {
         li {
-            key: "{state.value}",
             state.value.clone()
             button {
                 r#type: "button",
@@ -58,6 +58,6 @@ fn Child<'a>(cx: Scope, state: ChildState, on_click: EventHandler<'a>) -> Elemen
 async fn edit_10_children(children: UseSharedState<Children>) {
     let mut children = children.write();
     for i in 0..10 {
-        children.0[i].value = "edited".to_string();
+        children.0[i].value = format!("edited {}", children.0[i].value);
     }
 }
