@@ -1,10 +1,5 @@
 use dioxus::prelude::*;
 
-fn main() {
-    wasm_logger::init(wasm_logger::Config::default());
-    dioxus_web::launch(App);
-}
-
 #[derive(Clone, PartialEq)]
 struct ChildState {
     value: String,
@@ -13,7 +8,7 @@ struct ChildState {
 struct Children(Vec<ChildState>);
 
 #[component]
-fn App(cx: Scope) -> Element {
+pub fn App(cx: Scope) -> Element {
     use_shared_state_provider(cx, || Children(Vec::new()));
     let children = use_shared_state::<Children>(cx).unwrap();
     use_future(cx, (), |_| {
