@@ -8,54 +8,53 @@ struct ChildState {
 struct Children(Vec<ChildState>);
 
 #[component]
-pub fn App(cx: Scope) -> Element {
-    use_shared_state_provider(cx, || Children(Vec::new()));
-    let children = use_shared_state::<Children>(cx).unwrap();
-    use_future(cx, (), |_| {
-        let children = children.clone();
-        async move {
-            let mut children = children.write();
-            children.0.extend((0..100).map(|x| ChildState {
-                value: x.to_string(),
-            }));
-        }
+pub fn App() -> Element {
+    log::info!("rendering app");
+    let children = use_signal(|| {
+        Children(
+            (0..100)
+                .map(|i| ChildState {
+                    value: format!("child {}", i),
+                })
+                .collect(),
+        )
     });
-    cx.render(rsx! {
+    rsx! {
         button {
             r#type: "button",
-            onclick: |_| edit_10_children(children.clone()),
+            onclick: move |_| edit_10_children(children),
             "edit 10 children"
         }
         ul {
-            children
-                .read()
-                .0
-                .iter()
-                .map(|child| rsx!(Child {
-                    key: "{child.value}",
-                    state: child.clone(),
-                    on_click: |_|  cx.spawn(edit_10_children(children.clone())),
-                }))
+            for state in children.read().0.iter() {
+                Child {
+                    key: "{state.value}",
+                    state: state.clone(),
+                    onclick: move |_| {
+                        spawn(edit_10_children(children));
+                    },
+                }
+            }
         }
-    })
+    }
 }
 
 #[component]
-fn Child<'a>(cx: Scope, state: ChildState, on_click: EventHandler<'a>) -> Element {
+fn Child(state: ChildState, onclick: EventHandler) -> Element {
     log::info!("rendering child");
-    cx.render(rsx! {
+    rsx! {
         li {
-            state.value.clone()
+            "{state.value}"
             button {
                 r#type: "button",
-                onclick: |_| on_click.call(()),
+                onclick: move |_| onclick.call(()),
                 "edit"
             }
         }
-    })
+    }
 }
 
-async fn edit_10_children(children: UseSharedState<Children>) {
+async fn edit_10_children(mut children: Signal<Children>) {
     let mut children = children.write();
     for i in 0..10 {
         children.0[i].value = format!("edited {}", children.0[i].value);
