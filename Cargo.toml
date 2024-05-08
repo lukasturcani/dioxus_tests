@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "shared-state-callback"
+default-run = "big-model"
 
 [[bin]]
 name = "shared-state"
@@ -13,6 +13,11 @@ path = "src/bin/shared_state.rs"
 name = "shared-state-callback"
 path = "src/bin/shared_state_callback.rs"
 
+[[bin]]
+name = "big-model"
+path = "src/bin/big_model.rs"
+
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -20,6 +25,6 @@ path = "src/bin/shared_state_callback.rs"
 dioxus = { version = "0.5", features = ["web", "router"] }
 
 # Debug
-log = "0.4.19"
-dioxus-logger = "0.4.1"
+tracing = "0.1"
+dioxus-logger = "0.5"
 console_error_panic_hook = "0.1.7"

@@ -1,13 +1,13 @@
 use std::collections::HashMap;
 
 use dioxus::prelude::*;
-use log::LevelFilter;
+use tracing::Level;
 
 fn main() {
-    dioxus_logger::init(LevelFilter::Info).expect("failed to init logger");
+    dioxus_logger::init(Level::INFO).expect("failed to init logger");
     console_error_panic_hook::set_once();
 
-    log::info!("running shared state example");
+    tracing::info!("running shared state example");
     launch(App);
 }
 
@@ -19,7 +19,7 @@ struct Model {
 
 #[component]
 pub fn App() -> Element {
-    log::info!("rendering app");
+    tracing::info!("rendering app");
     let model = use_context_provider(|| {
         Signal::new(Model {
             users: HashMap::from([
