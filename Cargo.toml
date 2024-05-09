@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "big-model"
+default-run = "split-model"
 
 [[bin]]
 name = "shared-state"
@@ -16,6 +16,11 @@ path = "src/bin/shared_state_callback.rs"
 [[bin]]
 name = "big-model"
 path = "src/bin/big_model.rs"
+
+[[bin]]
+name = "split-model"
+path = "src/bin/split_model.rs"
+
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
