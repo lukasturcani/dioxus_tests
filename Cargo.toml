@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "split-model"
+default-run = "borrowed-props"
 
 [[bin]]
 name = "shared-state"
@@ -20,6 +20,10 @@ path = "src/bin/big_model.rs"
 [[bin]]
 name = "split-model"
 path = "src/bin/split_model.rs"
+
+[[bin]]
+name = "borrowed-props"
+path = "src/bin/borrowed_props.rs"
 
 
 
