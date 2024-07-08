@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "borrowed-props"
+default-run = "spawn-forever"
 
 [[bin]]
 name = "shared-state"
@@ -24,6 +24,10 @@ path = "src/bin/split_model.rs"
 [[bin]]
 name = "borrowed-props"
 path = "src/bin/borrowed_props.rs"
+
+[[bin]]
+name = "spawn-forever"
+path = "src/bin/spawn_forever.rs"
 
 
 
