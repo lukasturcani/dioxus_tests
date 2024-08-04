@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "spawn-forever"
+default-run = "use-context-provider-refresh"
 
 [[bin]]
 name = "shared-state"
@@ -28,6 +28,10 @@ path = "src/bin/borrowed_props.rs"
 [[bin]]
 name = "spawn-forever"
 path = "src/bin/spawn_forever.rs"
+
+[[bin]]
+name = "use-context-provider-refresh"
+path = "src/bin/use_context_provider_refresh.rs"
 
 
 
