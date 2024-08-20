@@ -16,6 +16,8 @@ fn App() -> Element {
     tracing::info!("rendering app");
     let mut counter = use_signal(|| 0);
     let mut local_counter = use_signal(|| 0);
+    let mut words = use_signal(|| vec![MyString("good".into()), MyString("bad".into())]);
+    let words_ = words.read();
     rsx! {
         div {
             button {
@@ -27,8 +29,15 @@ fn App() -> Element {
                 "parent local counter: {local_counter:?}"
             }
         }
-        GoodChild { counter, value: MyString("good".into()) },
-        BadChild { counter, value: MyString("bad".into()) },
+        GoodChild { counter, value: words_[0].clone() },
+        BadChild { counter, value: words_[1].clone() },
+        button {
+            onclick: move |_| words.set(vec![
+                MyString("new-good".into()),
+                MyString("new-bad".into()),
+            ]),
+            "change words"
+        }
     }
 }
 
