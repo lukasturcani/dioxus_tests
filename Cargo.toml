@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "use-context-provider-refresh"
+default-run = "signal-equality"
 
 [[bin]]
 name = "shared-state"
@@ -32,6 +32,10 @@ path = "src/bin/spawn_forever.rs"
 [[bin]]
 name = "use-context-provider-refresh"
 path = "src/bin/use_context_provider_refresh.rs"
+
+[[bin]]
+name = "signal-equality"
+path = "src/bin/signal_equality.rs"
 
 
 
