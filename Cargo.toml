@@ -3,7 +3,7 @@ name = "dioxus-tests"
 version = "0.1.0"
 authors = ["Lukas Turcani <lukasturcani93@gmail.com>"]
 edition = "2021"
-default-run = "signal-equality"
+default-run = "read-only-signal"
 
 [[bin]]
 name = "shared-state"
@@ -36,6 +36,10 @@ path = "src/bin/use_context_provider_refresh.rs"
 [[bin]]
 name = "signal-equality"
 path = "src/bin/signal_equality.rs"
+
+[[bin]]
+name = "read-only-signal"
+path = "src/bin/read_only_signal.rs"
 
 
 
